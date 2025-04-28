@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../functions/Auth'
-import MagicButton from '../ui/MagicButton'
+
 
 
 

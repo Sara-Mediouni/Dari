@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from "react";
-import { Label } from "../ui/label";
+
 
 import image from '../assets/images/sidi-bou-said-tunisie.jpg'
 import { useNavigate } from "react-router-dom";
