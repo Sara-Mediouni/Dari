@@ -18,30 +18,18 @@ export const SignIn = () => {
         toast.success('Connected!');
         navigate("/");
       } catch (err) {
-        if (err.code) {
-          switch (error.code) {
-            case 'auth/invalid-email':
-              setError('Invalid email address.');
-              break;
-            case 'auth/user-not-found':
-              setError('No account found with this email.');
-              break;
-            case 'auth/wrong-password':
-              setError('Incorrect password.');
-              break;
-            case 'auth/too-many-requests':
-              setError('Too many attempts, try again later.');
-              break;
-              case 'auth/invalid-credential':
-                setError("Account doesn't exist");
-                break;
-            default:
-              setError('An unexpected error occurred.');
-              break;
-          }
-        } else {
-          // Si ce n'est pas une erreur Firebase (très rare)
-          toast.error('Something went wrong.');
+        switch (err.code) {
+          case 'auth/user-not-found':
+            setError("Account doesn't exist");
+            break;
+          case 'auth/wrong-password':
+            setError("Incorrect password");
+            break;
+          case 'auth/invalid-email':
+            setError("Invalid email address");
+            break;
+          default:
+            setError("Something went wrong. Please try again.");
         }
       }
     };

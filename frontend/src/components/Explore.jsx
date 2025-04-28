@@ -35,23 +35,25 @@ const Explore = () => {
   }, []);
 
   return (
-    <div className="py-10  text-green-700 text-center">
-      <h2 className="text-3xl font-bold mb-10">Explore Tunisia</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6">
-        {image.map((i) => (
-          <div
-            key={i}
-            className="explore-card overflow-hidden rounded-xl shadow-lg transform transition duration-500 hover:scale-105"
-          >
+    <section className="py-16">
+    <div className="max-w-6xl mx-auto px-4 text-center">
+      <h2 className="!text-6xl sm:text-4xl font-bold mb-8 text-white">Our favorites on Instagram</h2>
+      <p className="text-white mb-12 text-lg sm:text-xl">
+      Discover our creations shared on Instagram. Follow us for more sweet and artisanal inspiration!
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {image.map((src, index) => (
+          <div key={index} className="overflow-hidden rounded-lg group">
             <img
-              src={`${i.name}`} // Replace with your image paths
-              alt={`explore-${i.name}`}
-              className="w-full h-60 object-cover"
+              src={src.name}
+              alt={`Instagram ${index + 1}`}
+              className="w-full h-48 object-cover transform group-hover:scale-110 transition duration-300"
             />
           </div>
         ))}
       </div>
     </div>
+  </section>
   );
 };
 

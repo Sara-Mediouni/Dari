@@ -6,48 +6,63 @@ const { setImage } = require("./ImageController"); // Importer la fonction du co
 
 const getAllItems=async(req,res)=>{
   try {
-    const { category, page = 1, limit = 6 } = req.query; // Récupération des paramètres de requête
-    const skip = (page - 1) * limit; // Nombre d'éléments à ignorer pour la pagination
-
-    // Requête pour récupérer les items avec le filtre de catégorie (si fourni) et la pagination
-    const query = category ? { category: category } : {}; // Si une catégorie est spécifiée, filtre sur celle-ci
-    const items = await Item.find(query)
-      .skip(skip)
-      .limit(parseInt(limit)) // Limiter les résultats à la valeur de "limit"
-      .exec();
-
-    // Calcul du nombre total de pages
-    const totalItems = await Item.countDocuments(query);
-    const totalPages = Math.ceil(totalItems / limit);
-
-    // Retour des items et du total de pages
-    res.status(200).json({
-      items,
-      totalPages,
-    });
+    const { category, page, limit } = req.query; // Ne pas mettre de valeur par défaut ici
+    const query = category ? { category } : {}; // Filtre par catégorie si elle existe
+  
+    let items;
+  
+    if (page && limit) {
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+  
+      items = await Item.find(query)
+        .skip(skip)
+        .limit(parseInt(limit))
+        .exec();
+  
+      const totalItems = await Item.countDocuments(query);
+      const totalPages = Math.ceil(totalItems / parseInt(limit));
+  
+      res.status(200).json({
+        items,
+        totalPages,
+      });
+    } else {
+      // Si page et limit ne sont pas définis, retourner tous les items sans pagination
+      items = await Item.find(query).exec();
+  
+      res.status(200).json({
+        items,
+        totalPages: 1, // 1 seule page vu qu'on affiche tout
+      });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error retrieving items' });
   }
-}
+}  
 const setItem = async (req, res) => {
   try {
+    console.log("Received new item:", req.body);
+
     if (!req.file || !req.file.filename) {
+      console.log("No image uploaded");
       return res.status(400).send("No image uploaded");
     }
 
-    // Validation des champs requis
-    const { item, price, category } = req.body;
+    const { item, price, category, description } = req.body;
 
     if (!item || item.trim() === "") {
+      console.log("Item name missing");
       return res.status(400).send("Item name is required");
     }
 
     if (!price || isNaN(price) || price <= 0) {
+      console.log("Invalid price");
       return res.status(400).send("Price must be a positive number");
     }
 
     if (!category || category.trim() === "") {
+      console.log("Category missing");
       return res.status(400).send("Category is required");
     }
 
@@ -55,17 +70,20 @@ const setItem = async (req, res) => {
       item,
       price,
       image: req.file.filename,
+      description,
       category,
     });
 
-    const savedItem = await newItem.save();
-    console.log("✅ Item saved:", savedItem);
-    return res.status(201).send("Item added successfully");
+    await newItem.save();
+    console.log("Item saved successfully");
+
+    return res.status(201).json({ success: true, message: "Item added successfully" });
   } catch (error) {
-    console.error("❌ Error while adding Item:", error);
-    return res.status(500).send("Error while adding Item");
+    console.error("Error saving item:", error);
+    return res.status(500).json({ success: false, message: "Error while adding Item", error: error.message });
   }
 };
+
 
 const getItem = async (req, res) => {
   try {

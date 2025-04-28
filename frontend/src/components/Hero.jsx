@@ -2,14 +2,14 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import video from "../assets/videos/Discover_Tunisia.mp4";
-import { useContext } from "react";
-import { AuthContext } from "../functions/Auth";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const { user } = useContext(AuthContext);
-  const words = `Where Tradition Meets Taste & Style`;
+
+  const words = `Welcome to Dari, Tunisian tradition at your fingertips.
+`;
 
   useGSAP(() => {
     gsap.set("#video-frame", {
@@ -46,11 +46,15 @@ const Hero = () => {
     <div className="absolute top-0 left-0 w-full h-full bg-black/40  z-10" />
   
     {/* TEXT OVER VIDEO */}
-    <div className="absolute inset-0 flex items-center justify-center z-20 px-4 sm:px-8 md:px-16 lg:px-24 text-center">
-      <h1 className=" text-white font-extrabold leading-tight text-[clamp(2rem,5vw,4.5rem)] drop-shadow-md w-full max-w-5xl mx-auto break-words">
-        {words}
-      </h1>
-    </div>
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4 sm:px-8 md:px-16">
+  <h1 className="text-white font-extrabold leading-tight text-[clamp(2.5rem,6vw,5rem)] drop-shadow-xl max-w-4xl mx-auto mb-6">
+    {words}
+  </h1>
+  <p className="text-white text-lg sm:text-xl md:text-2xl font-medium max-w-2xl mx-auto drop-shadow-md">
+    Discover authentic flavors, refined decor, and traditional clothing designed with passion.
+  </p>
+</div>
+
   </div>
   
   );

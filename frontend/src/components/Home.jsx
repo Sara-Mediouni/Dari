@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Hero from './Hero'
 import ClothSection from './ClothSection'
 import About from './About'
-import Footer from './Footer'
+
 
 import Cards from "./cards";
 import Explore from './Explore'
@@ -14,11 +14,13 @@ const Home = () => {
   return (
     <div> 
       
-    <Navbar/>
+   
     <Hero/>
     <Cards/>
     <ClothSection/>
-    <Explore/><About/>
+    <Explore/>
+      
+    <About/>
     <CultureTraditions/>
     
     <CallToAction/>

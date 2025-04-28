@@ -39,7 +39,7 @@ const About = () => {
     <div id="about" className="relative w-screen h-screen overflow-hidden">
       {/* Texte au milieu, au-dessus de l’image */}
       <div className="animated-title absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center px-4">
-        <h1 className="text-white font-bold leading-tight lg:text-5xl text-3xl sm:text-4xl">
+        <h1 className="text-white font-bold leading-tight lg:text-7xl text-3xl sm:text-4xl">
           Tunisia: Where golden beaches, rich history, and vibrant culture meet.
         </h1>
       </div>

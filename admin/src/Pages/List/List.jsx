@@ -22,7 +22,7 @@ const List = () => {
       const removeItem=async(itemId)=>{
        const response=await axios.post(`${url}/api/items/deleteitem/${itemId}`);
        await fetchList();
-       if (response.data.success){
+       if (response){
         toast.success(response.data.message)
        }
        else{
@@ -35,21 +35,23 @@ const List = () => {
     fetchList();
   },[])
   return (
-    <div className='list add flex-col'>
+    <div className='list add flex-col h-full'>
     <p>All Items List</p>
     <div className='list-table'>
       <div className='list-table-format title'> 
        <b>Image</b>
        <b>Name</b>
+       <b>Description</b>
        <b>Category</b>
        <b>Price</b>
        <b>Action</b>
       </div>
       {list.map((item,index)=>{
         return (
-          <div key={index} className='list-table-format'>
+          <div key={index} className='list-table-format '>
            <img src={`${url}/images/`+item.image} alt=""/>
            <p>{item.item}</p>
+           <p>{item.description}</p>
            <p>{item.category}</p>
            <p>${item.price}</p>
            <p onClick={()=>removeItem(item._id)} className='cursor'>X</p>

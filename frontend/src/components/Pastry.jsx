@@ -44,7 +44,7 @@ const Pastry = () => {
   return (
     <div className="mt-50 ">
      <h1 className="relative  text-white mx-20 text-7xl justify-start items-start flex font-bold"> Pastries</h1>
-      <div className="grid lg:grid-cols-3 gap-y-8 mt-40 sm:grid-col">
+      <div className="grid h-full grid-cols-3 gap-y-8 mt-40 sm:grid-col">
         {pastry.map((p) => (
           <div key={p._id}>
             <ThreeDCardDemo

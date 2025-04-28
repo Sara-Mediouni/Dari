@@ -10,7 +10,7 @@ const ContactPage = () => {
           <label className="block text-lg font-medium mb-1">Name</label>
           <input
             type="text"
-            placeholder="Votre nom"
+            placeholder="your full name"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
           />
         </div>
@@ -19,7 +19,7 @@ const ContactPage = () => {
           <label className="block text-lg font-medium mb-1">Email</label>
           <input
             type="email"
-            placeholder="Votre email"
+            placeholder="your email"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
           />
         </div>
@@ -28,7 +28,7 @@ const ContactPage = () => {
           <label className="block text-lg font-medium mb-1">Message</label>
           <textarea
             rows="5"
-            placeholder="Votre message"
+            placeholder="your message"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
           ></textarea>
         </div>
@@ -38,7 +38,8 @@ const ContactPage = () => {
           className="bg-green-900 hover:text-white text-white font-bold py-2 px-6 rounded-xl transition duration-200"
         >
           Send
-        </button></div>
+        </button>
+        </div>
       </form>
     </div>
   );

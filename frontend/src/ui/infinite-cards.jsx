@@ -1,4 +1,3 @@
-"use client";
 
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
@@ -45,6 +44,14 @@ export const InfiniteMovingCards = ({
         className
       )}
     >
+<div className="flex max-w-4xl mx-auto text-white flex-col gap-6 sm:gap-10 justify-center items-center mt-10 py-10 sm:py-20">
+  <h1 className="!text-6xl sm:text-4xl font-bold mb-6 sm:mb-10 text-center">Artisan Pastries</h1>
+  <p className="text-lg sm:text-2xl text-center px-4 sm:px-0">
+    Savor the authenticity of our Tunisian pastries. From golden baklava to melting makroud, each bite is a feast of ancestral flavors.
+  </p>
+</div>
+
+
       <ul
         ref={scrollerRef}
         className={clsx(

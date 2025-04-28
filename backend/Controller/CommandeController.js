@@ -1,7 +1,7 @@
 const Panier = require("../model/Cart");
 const mongoose = require('mongoose');
 const Command = require("../model/Commande");
-const stripe = require("stripe")("sk_test_51RBMXo4FlSbelSuKp15qkCFl65CTopoEuNZcQ5pIjYp0rJjoHazQIQkaunaimiOvL6enfref6slxKJRmfvx11w1q003oe4GUPp");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Item = require("../model/Item");
 const admin = require('firebase-admin');
 

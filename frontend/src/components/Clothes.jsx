@@ -7,7 +7,7 @@ const Clothes = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
      const getClothes=(page)=>{
-  axios.get(`http://localhost:5000/api/clothes?page=${page}&limit=6`)
+  axios.get(`http://localhost:5000/api/items/getallitems?category=Clothes&page=${page}&limit=6`)
   
   .then(response => {
     console.log(response.data.clothes);
@@ -44,7 +44,7 @@ useEffect(()=>{
     <div className="mt-50 ">
      <h1 className="relative text-white mx-20 text-7xl flex font-bold"> Clothes</h1>
   <div className='grid lg:grid-cols-3 gap-y-8 mt-40 sm:grid-col'>
-  { clothes.map((p) => (
+  { clothes?.map((p) => (
      <div key={p._id}> 
         <ThreeDCardDemo id={p._id} category="Clothes" name={p.item} price={p.price} image={p.image}/> 
      </div>

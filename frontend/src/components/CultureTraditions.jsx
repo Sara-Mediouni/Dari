@@ -1,9 +1,11 @@
-// 📁 src/sections/CultureTraditions.jsx
+
 import React from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
-import culture from '../assets/images/tourisme.jpg'
+
+import { assets } from '../assets/assets';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const CultureTraditions = () => {
@@ -33,21 +35,33 @@ const CultureTraditions = () => {
   }, []);
 
   return (
-    <div className="flex my-10 mx-20 flex-col-reverse lg:flex-row items-center py-24 px-8 bg-green-700">
-      <div className="lg:w-1/2 culture-text text-center lg:text-left mx-20">
-        <h2 className="text-4xl font-bold mb-6 text-white">Culture & Traditions</h2>
-        <p className="text-white ">
-          Discover the vibrant culture of Tunisia – from local souks to traditional music, immerse yourself in centuries of heritage and artistry.
-        </p>
-      </div>
-      <div className="lg:w-1/2 culture-img mb-10 lg:mb-0">
-        <img
-          src={culture} // Replace with your image
-          alt="Culture Tunisia"
-          className="rounded-xl shadow-lg"
-        />
+    <section className=" py-16 px-4">
+    <div className="max-w-screen-xl mx-auto text-center">
+      <h2 className="md:text-6xl text-4xl mt-10 mb-20 font-bold text-white ">Why choose Dari?</h2>
+      <div className="flex flex-wrap justify-center gap-8">
+        {/* Produit 100% artisanaux */}
+        <div className="bg-white p-6 feature rounded-lg shadow-lg w-full sm:w-1/3">
+          <img src={assets.artisan} alt="Artisan" className="mx-auto mb-4 w-16 h-16" />
+          <h3 className="text-xl font-semibold text-green-900 mb-4">100% artisanal products</h3>
+          <p className="text-gray-600">Each item is crafted with care and passion, respecting the oldest Tunisian traditions.</p>
+</div>
+
+        {/* Livraison rapide */}
+        <div className="bg-white p-6 feature rounded-lg shadow-lg w-full sm:w-1/3">
+          <img src={assets.delivery} alt="Livraison rapide" className="mx-auto mb-4 w-16 h-16" />
+          <h3 className="text-xl font-semibold text-green-900 mb-4">Fast delivery throughout Tunisia</h3>
+          <p className="text-gray-600">Receive your products at home, quickly and securely. We are committed to delivering as quickly as possible.</p>
+        </div>
+
+        {/* Emballages cadeaux disponibles */}
+        <div className="bg-white p-6 feature rounded-lg shadow-lg w-full sm:w-1/3">
+          <img src={assets.gift} alt="Emballage cadeau" className="mx-auto mb-4 w-16 h-16" />
+          <h3 className="text-xl font-semibold text-green-900 mb-4">Gift wrapping available</h3>
+          <p className="text-gray-600">Give in style with our personalized gift packaging, for every special occasion.</p>
+        </div>
       </div>
     </div>
+  </section>
   );
 };
 

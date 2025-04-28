@@ -7,11 +7,11 @@ const Deco = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const getDeco=(page)=>{
-  axios.get(`http://localhost:5000/api/deco/getalldeco?page=${page}&limit=6`)
+  axios.get(`http://localhost:5000/api/items/getallitems?category=Decoration&page=${page}&limit=6`)
   
   .then(response => {
    
-    setPastry(response.data.deco); 
+    setPastry(response.data.items); 
     setTotalPages(response.data.totalPages);
   })
   .catch(error => {
