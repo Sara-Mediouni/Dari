@@ -48,12 +48,12 @@ git clone https://github.com/ton-pseudo/dari.git
 cd dari
 cd frontend && npm install
 cd admin && npm install
-cd ../backend && npm install
+cd backend && npm install
 # Créer un fichier .env pour configurer MONGO_URI, PORT
-nodemon server (backend)
+
 npm run dev (frontend)
 npm run dev (admin)
-
+nodemon server (backend)
 
 ---
 ```
