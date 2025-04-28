@@ -12,8 +12,9 @@ import coffins from './images/img_0005.jpg'
 import deco from './images/8b66edb637c7425795583854e79ebb6c.full_.image_-1024x762.webp'
 import tableau from './images/tableau-artisanat-5060-decoration-murale-meubles-tunisie-1.jpg'
 import logo from './images/logo.png'
+import video from "./videos/Discover_Tunisia.mp4";
 export const assets = {
-    makroudh,logo,
+    makroudh,logo,video,
     deco,coffins,
     tableau,
     handcraft,

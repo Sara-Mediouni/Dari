@@ -1,7 +1,8 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import video from "../assets/videos/Discover_Tunisia.mp4";
+import { assets } from "../assets/assets";
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -35,7 +36,7 @@ const Hero = () => {
     {/* VIDEO BACKGROUND */}
     <video
       id="video-frame"
-      src={video}
+      src={assets.video}
       autoPlay
       loop
       muted
