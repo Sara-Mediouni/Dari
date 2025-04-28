@@ -14,7 +14,7 @@
 - [🚀 Lancer localement](#-lancer-localement)
 - [📋 Fonctionnalités principales](#-fonctionnalités-principales)
 - [⚠️ Remarque](#️-remarque)
-- [📬 Me contacter](#-me-contacter)
+
 
 ---
 
@@ -62,3 +62,7 @@ npm run dev (admin)
 -👤 Gestion des utilisateurs et réservations.
 
 -📋 Historique des réservations.
+
+
+## ⚠️ Remarque
+Nécessite MongoDB et Stripe pour finaliser les commandes.
