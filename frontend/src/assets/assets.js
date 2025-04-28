@@ -1,4 +1,4 @@
-import makroudh from './images/Makrouds.JPG'
+import makroudh from './images/Makrouds.jpg'
 import kaak from './images/kaak-warka.jpg'
 import samsa from './images/téléchargé.jpg'
 import yoyo from './images/yoyos-2-FP.jpg'
