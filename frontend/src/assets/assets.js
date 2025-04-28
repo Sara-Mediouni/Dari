@@ -11,8 +11,9 @@ import handcraft from './images/pew-nguyen-w76jSGvDqbg-unsplash.jpg'
 import coffins from './images/img_0005.jpg'
 import deco from './images/8b66edb637c7425795583854e79ebb6c.full_.image_-1024x762.webp'
 import tableau from './images/tableau-artisanat-5060-decoration-murale-meubles-tunisie-1.jpg'
+import logo from './images/logo.png'
 export const assets = {
-    makroudh,
+    makroudh,logo,
     deco,coffins,
     tableau,
     handcraft,
