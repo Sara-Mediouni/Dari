@@ -1,127 +1,132 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../functions/Auth';
 import { useNavigate } from 'react-router-dom';
 import image from '../assets/images/sidi-bou-said-tunisie.jpg'
-import clsx from 'clsx';
-import { Label } from "../ui/label";
-import MagicButton from '../ui/MagicButton';
-import "react-toastify/dist/ReactToastify.css";
-import { Bounce, toast } from "react-toastify";
+
+import { toast } from "react-toastify";
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('')
   const navigate = useNavigate(); 
   
     const { signIn  } = useContext(AuthContext);
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-    try{
-      await signIn(email, password);
-      toast.success('Connexion réussie!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-        });
-      navigate("/");
+    const handleSubmit = async (e) => {
+      e.preventDefault(); // Empêche le rechargement de la page
+      try {
+        await signIn(email, password);
+        toast.success('Connected!');
+        navigate("/");
+      } catch (err) {
+        if (err.code) {
+          switch (error.code) {
+            case 'auth/invalid-email':
+              setError('Invalid email address.');
+              break;
+            case 'auth/user-not-found':
+              setError('No account found with this email.');
+              break;
+            case 'auth/wrong-password':
+              setError('Incorrect password.');
+              break;
+            case 'auth/too-many-requests':
+              setError('Too many attempts, try again later.');
+              break;
+              case 'auth/invalid-credential':
+                setError("Account doesn't exist");
+                break;
+            default:
+              setError('An unexpected error occurred.');
+              break;
+          }
+        } else {
+          // Si ce n'est pas une erreur Firebase (très rare)
+          toast.error('Something went wrong.');
+        }
       }
-      catch(error){
-        toast.error(error, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-          });
-      }
+    };
     
-      
-    
-  };
+ useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null); // or setError('') if you prefer
+      }, 5000); // 3000ms = 3 seconds
 
+      return () => clearTimeout(timer); // Clean up the timer if component unmounts
+    }
+  }, [error]);
+  
   return (
-    <div className="grid grid-cols-2 shadow-lg my-40 w-[80%] max-w-4xl rounded-2xl bg-white dark:bg-stone300 overflow-hidden">
-  {/* Partie Formulaire */}
-  <div className="p-8 flex flex-col justify-center">
-    <h2 className="text-3xl font-Rangile text-green700 dark:text-neutral-200">
-      Welcome to Dari
-    </h2>
-    <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300"></p>
-
-    <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
-   
-
-      <LabelInputContainer>
-        <Label htmlFor="email">Email Address</Label>
-        <input
-          id="email"
-          placeholder="Email"
-          className="w-full rounded-lg h-[45px] border border-stone300 p-5"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </LabelInputContainer>
-
-      <LabelInputContainer>
-        <Label htmlFor="password">Password</Label>
-        <input
-          id="password"
-          className="w-full rounded-lg h-[45px] border border-stone300 p-5"
-          placeholder="Password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </LabelInputContainer>
-      <div className="relative">
-       <a href='/signup' className="text-green900 my-2 mx-2">Don't have an account yet?</a></div>
-      <div className="flex justify-center mt-6">
-       
-       <MagicButton name="Sign In" type="submit" />
-       
-      </div>
-    </form>
-  </div>
-
-  {/* Partie Image */}
-  <div className="relative">
-    <img
-      src={image}
-      className="h-full w-full object-cover"
-      alt="Illustration"
-    />
-  </div>
-</div>
+    <div className="flex flex-col items-center my-10 ">
+       <div className="grid grid-cols-1 md:grid-cols-2 border-green-900 border-4 shadow-lg my-20 w-[90%] max-w-4xl rounded-2xl bg-white dark:text-white overflow-hidden">
+         
+         {/* Partie Formulaire */}
+         <div className="p-8 flex flex-col justify-center">
+           <h2 className="text-3xl  text-green-700 ">
+             Welcome Back
+           </h2>
+          
+     
+           <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
+             
+     
+             <div className="flex flex-col space-y-2">
+               <label className="text-sm  font-medium text-green-700 ">
+                 Email Address
+               </label>
+               <input
+               required
+                 className="w-full rounded-lg text-black h-[45px] border border-green-900 p-4 focus:outline-none focus:ring-2 focus:ring-white"
+                 placeholder="Email"
+                 type="email"
+                 onChange={(e) => setEmail(e.target.value)}
+               />
+             </div>
+     
+             <div className="flex flex-col space-y-2">
+               <label className="text-sm font-medium text-green-700 ">
+                 Password
+               </label>
+               <input
+                 className="w-full rounded-lg text-black h-[45px] border border-green-900 p-4 focus:outline-none focus:ring-2 "
+                 placeholder="Password"
+                 type="password"
+                 
+                 onChange={(e) => setPassword(e.target.value)}
+                 required
+               />
+             </div>
+             
+             <div className="relative text-center">
+               <a href="/signup" className="text-green-700 text-sm hover:underline">
+                 Don't have an account, yet?
+               </a>
+             </div>
+             {error && (
+              <div className="mt-4 p-3 text-red-600 bg-red-100 rounded-lg text-center">
+                {error}
+              </div>
+            )}
+             <div className="flex justify-center mt-6">
+               <button type="submit" className="p-4 bg-green-900 text-white rounded-full">
+               Login
+               </button>
+             </div>
+           </form>
+         </div>
+     
+         {/* Partie Image */}
+         <div className="relative md:block">
+           <img
+             src={image}
+             className="h-64 md:h-full w-full object-cover"
+             alt="Illustration"
+           />
+         </div>
+       </div>
+     </div>
   )
 }
-const BottomGradient = () => {
-  return (
-    <>
-      <span
-        className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span
-        className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
-  );
-};
 
-const LabelInputContainer = ({
-  children,
-  className
-}) => {
-  return (
-    <div className={clsx("flex w-full flex-col space-y-2", className)}>
-      {children}
-    </div>
-  );
-};
 
 

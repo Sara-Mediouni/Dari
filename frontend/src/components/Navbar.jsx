@@ -1,30 +1,27 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { navItems } from "../data";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { gsap } from "gsap";
-import { useWindowScroll } from "react-use";
-import { RiLogoutBoxRFill } from "react-icons/ri";
 
-import { MdLogout, MdOutlineInventory2 } from "react-icons/md";
+
 import { AuthContext } from "../functions/Auth";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/Hovercard";
-import MagicButton from "../ui/MagicButton";
-import { FaShoppingBag } from "react-icons/fa";
+
+import { IoBagOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import axios from "axios";
-import { FaClipboardList } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../functions/CartContext";
 import { MdDeleteForever } from "react-icons/md";
 
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { Fragment } from "react";
+
 const Navbar = () => {
-  const [order, setOrder] = useState(null);
   const { logOut, user } = useContext(AuthContext);
-  const [isNavVisible, setIsNavVisible] = useState(false);
-  const { y: currentScrollY } = useWindowScroll();
-  const navContainerRef = useRef(null);
-  const [idPanier, setidPanier] = useState();
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showCartMenu, setShowCartMenu] = useState(false);
+
+ 
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useContext(CartContext);
   const { cartTotal, setCartItems } = useContext(CartContext);
@@ -46,19 +43,7 @@ const Navbar = () => {
       console.error("Error :", error);
     }
   };
-  useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
-    } else if (currentScrollY < lastScrollY) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
-    }
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
+ 
   useEffect(() => {
       // Charger les items depuis localStorage au premier chargement
       const storedCart = JSON.parse(localStorage.getItem('cart'));
@@ -116,15 +101,7 @@ const Navbar = () => {
   const handleRemoveCart = (id) => {
     removeFromCart(id);
   };
-  useEffect(() => {
-    gsap.to(navContainerRef.current, {
-      y: isNavVisible ? 0 : -100,
-      opacity: isNavVisible ? 1 : 0,
-      duration: 0.2,
-    });
 
-    console.log(order);
-  }, [isNavVisible]);
   useEffect(() => {
     // Cela peut être utile si tu veux faire quelque chose chaque fois que le panier change
     console.log("Cart updated:", cartItems);
@@ -132,148 +109,116 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="relative flex justify-center items-center">
-        <div
-          ref={navContainerRef}
-          className="flex text-bold max-w-fit md:min-w-[70vw]
-         lg:min-w-fit fixed z-[5000] top-10 inset-x-0 
-         mx-auto px-10 py-5 rounded-lg border
-          border-stone300 
-          shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4"
-        >
-          {navItems.map((navItem, idx) => (
-            <a
-              key={`${idx}`}
-              href={navItem.link}
-              className="relative font-Rangile font-bold dark:text-white items-center flex space-x-1 text-white dark:hover:text-white hover:text-white"
-            >
-              <span className="block sm:hidden">{navItem.icon}</span>
-              <span className="!cursor-pointer text-sm">{navItem.name}</span>
-            </a>
-          ))}
+
+<nav className="fixed top-4 inset-x-0 z-50 px-4">
+<div className="max-w-[90vw] bg-green-900 md:max-w-5xl md:mx-auto flex items-center justify-between bg-opacity-90 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
+        
+        {/* LEFT SIDE */}
+        <div className="flex items-center gap-3">
+          
+          {/* Mobile menu */}
+          <div className="md:hidden relative">
+            <button onClick={() => setShowMobileMenu(!showMobileMenu)} className="p-2 rounded-lg text-white">
+              <HiOutlineMenuAlt3 size={24} />
+            </button>
+
+            {showMobileMenu && (
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                {navItems.map((navItem, idx) => (
+                  <a key={idx} href={navItem.link} className="block px-4 py-2 text-green-700 hover:bg-violet-100">
+                    {navItem.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Full nav links */}
+          <div className="hidden md:flex items-center gap-3">
+            {navItems.map((navItem, idx) => (
+              <a key={idx} href={navItem.link} className="flex items-center gap-2 px-3 py-2 rounded-lg text-white hover:bg-pink-1 transition-colors">
+                <span className="text-sm font-semibold">{navItem.name}</span>
+              </a>
+            ))}
+          </div>
+
         </div>
-        <div className="fixed justify-center right-[50px] z-[5000] top-[50px] flex items-center">
+
+        {/* RIGHT SIDE */}
+        <div className="flex items-center gap-3 relative">
           {user ? (
             <>
-              <div className="grid grid-cols-2 gap-10">
-                <Menu as="div" className="relative text-left">
-                  <div>
-                    <MenuButton className="inline-flex w-[full] justify-center  rounded-md px-3 py-2 text-sm font-semibold text-gray-900 ">
-                      <CgProfile size={30} color="white" />
-                    </MenuButton>
+              {/* Profile */}
+              <div className="relative">
+                <button onClick={() => setShowProfileMenu(!showProfileMenu)} className="p-1 rounded-full hover:bg-pink-1 transition-colors">
+                  <CgProfile size={25} className="text-white" />
+                </button>
+
+                {showProfileMenu && (
+                  <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg ring-1 ring-green-700 ring-opacity-5 z-50">
+                    <a href="/myorders" className="block px-4 py-2 text-green-700 hover:bg-gray-100">Orders</a>
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-green-700 hover:bg-gray-100">Logout</button>
                   </div>
+                )}
+              </div>
 
-                  <MenuItems
-                    transition
-                    className="absolute right-0  mt-2 w-42 rounded-md bg-white shadow-lg ring-black/5 focus:outline-hidden  "
-                  >
-                    <div className="py-1">
-                      <MenuItem>
-                        <a
-                          href="/myorders"
-                          className="flex gap-2 px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                        >
-                          <FaClipboardList size={20} color="#87986a" /> Orders
-                        </a>
-                      </MenuItem>
-                      <MenuItem>
-                        <a
-                          onClick={handleLogout}
-                          className="flex gap-2 px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                        >
-                          <RiLogoutBoxRFill size={20} color="#87986a" /> Logout
-                        </a>
-                      </MenuItem>
-                    </div>
-                  </MenuItems>
-                </Menu>
-                <HoverCard>
-                  <HoverCardTrigger asChild>
-                    <button>
-                      <FaShoppingBag size={30} color="white" />
-                    </button>
-                  </HoverCardTrigger>
+              {/* Cart */}
+              <div className="relative">
+                <button onClick={() => setShowCartMenu(!showCartMenu)} className="rounded-full">
+                  <IoBagOutline size={25} className="text-white" />
+                </button>
 
-                  <HoverCardContent className="w-80 p-3 m-2">
-                    <span className="flex justify-center items-center font-bold font-Rangile text-2xl m-4">
-                      Cart
-                    </span>
-                    <div className="overflow-y-auto h-[200px] overflow-x-hidden">
-                      {cartItems && cartItems?.length > 0 ? (
-                        cartItems.map((item, index) => (
-                          <div className="" key={index}>
-                            <div className="grid relative grid-cols-2 mt-10">
-                              <img
-                                className="h-[100px] w-[100px] mx-5"
-                                src={`http://localhost:5000/images/${item.item.image}`}
-                                alt={item.name}
-                              />
-                              <div className="flex justify-start items-start relative font-general text-md ">
-                                <ul>
-                                  <li className="my-2 font-bold text-lg">
-                                    <span className="words-wrap ">
-                                      {item.item.name}
-                                    </span>
-                                  </li>
-                                  <li className="my-2 ">
-                                    <span className="words-wrap ">
-                                      {item.item.quantity}
-                                    </span>
-                                  </li>
-
-                                  <li className="my-2 grid grid-cols-2 gap-10">
-                                    <span>{item.item.totalPrice + " DT"}</span>{" "}
-                                    <button
-                                      onClick={() =>
-                                        handleRemoveCart(item.item._id)
-                                      }
-                                    >
-                                      <MdDeleteForever
-                                        size={25}
-                                        color="#87986a"
-                                      />
-                                    </button>
-                                  </li>
-                                </ul>
-                              </div>
+                {showCartMenu && (
+                  <div className="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-lg ring-1 ring-opacity-5 z-50 p-4">
+                    <h3 className="text-lg font-bold text-center mb-3">Cart</h3>
+                    <div className="h-40 overflow-y-auto space-y-3">
+                      {cartItems?.length > 0 ? (
+                        cartItems.map((item, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <img src={`http://localhost:5000/images/${item.item.image}`} alt={item.item.name} className="w-12 h-12 rounded-md object-cover" />
+                            <div className="flex-1">
+                              <p className="font-semibold text-sm truncate">{item.item.name}</p>
+                              <p className="text-xs text-gray-500">{item.item.quantity} pcs</p>
+                            </div>
+                            <div className="flex flex-col items-end">
+                              <p className="text-sm font-medium">{item.item.totalPrice} DT</p>
+                              <button onClick={() => handleRemoveCart(item.item._id)}>
+                                <MdDeleteForever size={20} className="text-gray-500 hover:text-red-600 transition-colors" />
+                              </button>
                             </div>
                           </div>
                         ))
                       ) : (
-                        <div>Empty cart</div>
-                      )}{" "}
+                        <p className="text-center text-gray-500">Empty cart</p>
+                      )}
                     </div>
-                    {cartItems && cartItems?.length > 0 ? (
-                      <span className="flex items-center justify-center mt-10 text-lg font-bold">
-                        Total ${cartTotal}
-                      </span>
-                    ) : (
-                      <></>
+
+                    {cartItems?.length > 0 && (
+                      <div className="mt-4 text-center font-semibold">
+                        Total: {cartTotal} DT
+                      </div>
                     )}
 
-                    <div className="justify-center relative flex items-center m-6">
-                      <a
-                        href="/checkout"
-                        onClick={() => syncCartWithBackend(user.uid)}
-                      >
-                        {" "}
-                        <MagicButton name="checkout" />
+                    <div className="mt-4 flex justify-center">
+                      <a href="/checkout" onClick={() => syncCartWithBackend(user.uid)} className="bg-green-900 text-white px-4 py-2 rounded-lg hover:bg-pink-3 font-bold transition-colors">
+                        Checkout
                       </a>
                     </div>
-                  </HoverCardContent>
-                </HoverCard>{" "}
+                  </div>
+                )}
               </div>
             </>
           ) : (
-            <div className="grid grid-cols-2 gap-10">
-              <button onClick={handlesignup}>
-                <CgProfile size={30} color="white" />
-              </button>
-            </div>
+            <button onClick={handlesignup} className="rounded-full transition-colors">
+              <CgProfile size={28} className="text-white" />
+            </button>
           )}
-          <></>
         </div>
+
       </div>
+    </nav>
+
+
     </>
   );
 };

@@ -1,11 +1,11 @@
 import { assets } from "../assets/assets";
 
 export const navItems = [
-   
+  { name: "Home", link: "/" },
     { name: "Pastry", link: "/pastry" },
     { name: "Clothes", link: "/clothes" },
     { name: "Decoration", link: "/deco" },
-    { name: "Contact", link: "#contact" }, 
+    { name: "Contact", link: "/contact" }, 
     { name: "About", link: "/about" },
   ];
   export const testimonials = [

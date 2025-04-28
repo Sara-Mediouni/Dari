@@ -29,7 +29,7 @@ const Orders = () => {
 
 
   return (
-    <div className='w-full mt-40 h-[500px] py-40 relative flex justify-start items-start bg-green900'>
+    <div className='mx-30 text-green-700 mt-40 h-[500px] py-40 relative flex justify-start items-start bg-green900'>
    
    <div className='grid grid-rows relative -mt-20'>
     <div className='px-5 font-bold text-xl text-stone300 mx-5 grid gap-x-12 grid-cols-5 w-full h-full'>

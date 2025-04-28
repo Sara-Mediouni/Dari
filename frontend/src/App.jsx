@@ -14,6 +14,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import { AuthContext } from "./functions/Auth";
 import Verify from "./components/Verify";
 import Orders from "./components/Orders";
+import ContactPage from "./components/ContactPage";
+import AboutPage from "./components/AboutUs";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -24,7 +26,7 @@ function App() {
   const isAuthPage = location.pathname === "/signin" || location.pathname === "/signup";
 
   return (
-    <main className="relative flex justify-center items-center flex-col overflow-clip mx-auto sm:px-10">
+    <main className="flex-grow overflow-x-hidden">
       <ToastContainer />
       {/* Afficher Navbar SEULEMENT si ce n'est PAS une page d'auth */}
       <Navbar />
@@ -38,6 +40,8 @@ function App() {
         <Route path="/clothes" element={<Clothes />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/myorders" element={<Orders />} />
       </Routes>
 

@@ -46,6 +46,7 @@ const addUserToDatabase = async (uid, name, email) => {
       console.log("Utilisateur connecté :", user);
     } catch (error) {
       console.error("Erreur lors de la connexion :", error.message);
+      throw error;
     }
   };
 

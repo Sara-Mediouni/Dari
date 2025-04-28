@@ -4,10 +4,7 @@ const uri = 'mongodb+srv://sarahmediouni4:JFCIoZiYbavivnNr@cluster0.zdz9o8e.mong
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        await mongoose.connect(uri);
         console.log("✅ Connected to MongoDB Atlas (Dari database)");
     } catch (error) {
         console.error("❌ Error connecting to MongoDB:", error);

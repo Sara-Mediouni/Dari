@@ -20,21 +20,21 @@ export function ThreeDCardDemo({id,name,image,price, category}) {
     }
     
   return (
-    <CardContainer className="w-[90%] mx-10" >
+    <CardContainer className="w-[80%] mx-10" >
       <CardBody
-        className="bg-gray-50 relative group/card  dark:hover:shadow-2xl 
-        dark:hover:shadow-emerald-500/[0.1] bg-green800
+        className=" relative group/card  dark:hover:shadow-2xl 
+        dark:hover:shadow-emerald-500/[0.1] bg-green-700
         dark:border-white/[0.2] border-black/[0.1] w-full sm:w-[30rem] 
         h-[90%] rounded-xl p-6 border  ">
         <CardItem
           translateZ="50"
-          className="text-xl font-bold text-white">
+          className="text-2xl mb-5 font-bold text-white">
           {name}
         </CardItem>
         <CardItem
           translateZ="60"
-          className="text-neutral-500 text-xl font-bold max-w-sm mt-2 dark:text-neutral-300">
-          {price}
+          className="text-white !text-lg font-bold max-w-sm mt-2 dark:text-white">
+          {price} TND
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
         <img
@@ -49,8 +49,8 @@ export function ThreeDCardDemo({id,name,image,price, category}) {
           <CardItem
             translateZ={20} 
             onClick={user? handleOpen : handleSignIn}
-            className="relative px-4 py-2  rounded-xl bg-white
-             dark:bg-white dark:text-black text-black text-xs 
+            className="relative px-4 py-2  rounded-xl bg-green-900
+             dark:bg-pink-2 dark:text-white text-white text-lg 
              font-bold">
            
             <button >Order now </button>
@@ -59,7 +59,7 @@ export function ThreeDCardDemo({id,name,image,price, category}) {
                    size="xs"
                    open={open}
                    handler={handleOpen}
-                   className="bg-transparent shadow-none"
+                   className="bg-black/50 font-general shadow-none"
                  >
               <DialogWithForm id={id} category={category} name={name} price={price} image={image} />
             

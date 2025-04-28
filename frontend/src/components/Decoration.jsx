@@ -41,8 +41,8 @@ useEffect(()=>{
 
 
   return (
-    <div className="mt-20 ">
-     <h1 className="relative top-20 left-30 font-Rangile text-stone300 mx-20 text-7xl flex font-bold"> Decoration</h1>
+    <div className="mt-50 ">
+     <h1 className="relative text-white mx-20 text-7xl flex font-bold"> Decoration</h1>
   <div className='grid lg:grid-cols-3 gap-y-8 mt-40 sm:grid-col'>
   { pastry.map((p) => (
      <div key={p._id}> 

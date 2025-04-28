@@ -55,149 +55,67 @@ const handleCheckout = async (userId) => {
   }, []);
 
   return (
-    <div className="bg-stone300 w-full text-black font-general border mt-40 border-stone300 rounded-lg m-20 relative justify-center">
-      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
-        <a href="#" className="text-3xl font-Rangile text-green900">
-          Dari
-        </a>
-        <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
-          <div className="relative">
-            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
-              <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200 text-xs font-semibold text-emerald-700"
-                  href="#"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </a>
-                <span className="font-semibold text-gray-900">Shop</span>
-              </li>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-              <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
-                  href="#"
-                >
-                  2
-                </a>
-                <span className="font-semibold text-gray-900">Shipping</span>
-              </li>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-              <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white"
-                  href="#"
-                >
-                  3
-                </a>
-                <span className="font-semibold text-gray-500">Payment</span>
-              </li>
-            </ul>
+    <div className="bg-green-700 font-general  text-white  border mt-40 border-gray-300 rounded-lg mx-10 my-10 relative">
+    {/* Header */}
+    <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+      <a href="#" className="text-3xl font-bold text-green-700">
+        Dari
+      </a>
+     
+    </div>
+  
+    {/* Order Summary */}
+    <div className="relative p-10 sm:px-10 lg:px-20 xl:px-32">
+      <div className="px-4 pt-8">
+        <p className="text-2xl font-bold">Order Summary</p>
+        <p className="text-white">Check your items. And select a suitable shipping method.</p>
+  
+        <div className="mt-8 rounded-lg bg-pink-3 px-2 py-4 sm:px-6 overflow-y-auto h-[400px] w-full">
+          <div className="grid gap-4">
+            <div className="grid grid-cols-5 gap-x-8 font-semibold text-white">
+              <h2>Image</h2>
+              <h2>Name</h2>
+              <h2>Price</h2>
+              <h2>Category</h2>
+              <h2>Remove</h2>
+            </div>
+            <hr className="border-white/20 my-2" />
+  
+            {cartItems?.map((item, index) => (
+              <div key={index} className="grid grid-cols-5 gap-x-8 items-center text-white">
+                <img src={`http://localhost:5000/images/${item.item.image}`} className="w-16 h-16 object-cover rounded" />
+                <p>{item.item.name}</p>
+                <p>$ {item.item.totalPrice}</p>
+                <p>{item.item.category}</p>
+                <button onClick={() => removeFromCart(item.item._id)} className="text-red-500 hover:text-red-700">x</button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    
-      <div className=" relative sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 p-12">
-        <div className="px-4 pt-8">
-          <p className="text-2xl font-bold">Order Summary</p>
-          <p className="text-gray-400">
-            Check your items. And select a suitable shipping method.
-          </p>
-          <div
-            className="mt-8  rounded-lg border-stone300 bg-green700 
-    px-2 py-4 sm:px-6 overflow-y-auto h-[400px] w-full "
-
-          > 
-
-<div className="grid grid-rows gap-x-16 gap-y-4 ">
-          <div className="grid grid-cols-5 gap-x-16 gap-y-4 ">
-          <h2>Image</h2>
-          <h2>Name</h2>
-          <h2>Price</h2>
-          <h2>Category</h2>
-          <h2>remove</h2>
-          </div>
-          <span className="w-full relative"><hr/></span>
-          {cartItems?.map((item, index)=>{
-
-          return(
-          <div key={index} className="grid grid-cols-5 gap-x-16 gap-y-4 ">
-          <p><img src={`http://localhost:5000/images/${item.item.image}`}/></p>
-          <p>{item.item.name}</p>
-          <p>{item.item.totalPrice}</p>
-          <p>{item.item.category}</p>
-          <a onClick={()=>removeFromCart(item.item._id)}>x</a>
-          </div>
-          )})}
-          
-          
-         
-          </div>
-          
-           
-          </div>
-
-     
-        </div>
-       
-      </div>
-     
-        <div className="relative grid grid-cols-2 gap-y-10 gap-x-5 justify-items-center m-5">
-        <div className="font-bold text-xl">
+    </div>
+  
+    {/* Totals */}
+    <div className="grid grid-cols-2 gap-5 justify-items-center my-5 px-12">
+      <div className="font-bold text-xl text-white space-y-2">
         <p>Total Order</p>
         <p>Shipping Fee</p>
-        <p>Total</p></div>
-        <div>
-          <p>$ {cartTotal}</p>
-          <p>$ 7</p>
-          <p>$ {cartTotal+7}</p>
-        </div>
+        <p>Total</p>
       </div>
-      
-      <div className="flex items-center justify-center my-10">
-      <button onClick={() => handleCheckout(user.uid)}> 
-      <MagicButton name="Proceed to payment" />
-      </button></div>
+      <div className="text-white space-y-2">
+        <p>TND {cartTotal}</p>
+        <p>TND 7</p>
+        <p>TND {cartTotal + 7}</p>
       </div>
+    </div>
+  
+    {/* Checkout Button */}
+    <div className="flex  items-center justify-center mb-10">
+      <button className="bg-green-900 p-5 rounded-full text-white font-bold" onClick={() => handleCheckout(user.uid)}>
+        Proceed to payment
+      </button>
+    </div>
+  </div>
   );
 };
 

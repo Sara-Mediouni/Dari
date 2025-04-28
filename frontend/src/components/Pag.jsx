@@ -11,8 +11,8 @@ export function PaginationDemo({ currentPage, totalPages, handleNextPage, handle
           <button
               onClick={handlePrevPage}
               disabled={currentPage === 1}
-              className="rounded-full border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-stone300 hover:text-green900 hover:bg-stone300 hover:border-slate-800
-               focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-stone300 active:text-stone300 active:bg-green900 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+V              className="min-w-9 hover:text-white rounded-full border border-slate300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-green-700
+               hover:bg-green-700 hover:border-green-700 focus:text-white focus:bg-green-700 focus:border-green-700 active:border-green-700 active:text-white active:bg-green-700 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
           >
               Prev
           </button>
@@ -24,8 +24,8 @@ export function PaginationDemo({ currentPage, totalPages, handleNextPage, handle
                   onClick={() => handlePageChange(pageNumber)} // Cette fonction doit gérer la mise à jour de `currentPage`
                   className={`min-w-9 rounded-full py-2 px-3.5 text-center text-sm transition-all shadow-sm ${
                       currentPage === pageNumber
-                          ? "bg-slate-800 text-white"
-                          : "border border-stone300 text-stone300 hover:text-green900 hover:bg-stone300 hover:border-green900"
+                          ? "bg-green-700 text-white"
+                          : "border border-stone300 text-stone300 hover:text-green900 hover:bg-stone300 "
                   }`}
               >
                   {pageNumber}
@@ -36,8 +36,8 @@ export function PaginationDemo({ currentPage, totalPages, handleNextPage, handle
           <button
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
-              className="min-w-9 hover:text-green900 rounded-full border border-slate300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 
-               hover:bg-stone300 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              className="min-w-9 hover:text-white rounded-full border border-slate300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-green-700
+               hover:bg-green-700 hover:border-green-700 focus:text-white focus:bg-green-700 focus:border-green-700 active:border-green-700 active:text-white active:bg-green-700 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
           >
               Next
           </button>

@@ -1,65 +1,77 @@
 "use client";
 import React from "react";
-import { BackgroundGradient } from "../ui/background-gradient";
-import { IconAppWindow } from "@tabler/icons-react";
-import image1 from '../assets/images/2378e96fc2923929716cf94ad77902c8.jpg'
-import image2 from '../assets/images/cd3c24d68a2f6f27242163ed2765f717.jpg'
+import { motion } from "framer-motion";
+
+import image1 from "../assets/images/2378e96fc2923929716cf94ad77902c8.jpg";
+import image2 from "../assets/images/cd3c24d68a2f6f27242163ed2765f717.jpg";
+
+const items = [
+  {
+    title: "Barnous",
+    description:
+      "The Barnous is a complementary piece worn over the Jebba and other garments. It adds elegance and warmth, perfect for ceremonial events.",
+    image: image1,
+  },
+  {
+    title: "Jebba",
+    description:
+      "The Jebba is a popular traditional male attire in Tunisia, reflecting heritage, craftsmanship and timeless style.",
+    image: image2,
+  },
+];
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
 const ClothSection = () => {
   return (
-    <div className="relative flex flex-col-1 gap-8 m-20 top-20 w-[90%] h-[70%] items-center justify-center">
-      <BackgroundGradient className="relative rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
-        <img
-        className="w-full h-[50vh] justify-center items-center flex"
-          src={image1}
-         
-          
-          
-        />
-        <p className="text-base text-bold sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-          Barnous
-        </p>
- 
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-        The Barnous is a complementary piece worn over the Jebba and other garments.
+    <section className="w-full py-20  overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className=" text-4xl font-extrabold text-center  text-white mb-12">
+        Discover the timeless elegance of Tunisian traditional attire, where craftsmanship and culture intertwine to create unique pieces that celebrate our rich heritage.
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {items.map((item, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="bg-white w-full rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300 border-4 border-green-700 overflow-hidden"
+            >
+              <div className="overflow-hidden w-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-2xl font-semibold text-green-700 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-green-700 text-sm sm:text-base leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-This is more popular during the winter season since it’s a long and heavy woolen coat that often features a large hood.
-
-This traditional garb is very similar to a loose yet cozy poncho considering it has no sleeves.
-
-The northern version of the barnous is known as Kachabiya, which showcases some of the distinctive features of Tunisian fashion: the architectural stripes.
-
-Kachabiyas are practically made from the same materials but they differ from the Barnous by their brown and white stripes. 
-        </p>
-      
-      </BackgroundGradient>
-      <BackgroundGradient className="relative rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
-        <img
-        className="w-full h-[50vh] justify-center items-center flex"
-          src={image2}
-        
-          
-          
-        />
-        <p className="text-base text-bold sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-        Jebba
-        </p>
- 
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-        One of the most popular traditional pieces of clothing in Tunisia is the Jebba.
-
-This exclusively male attire is a sleeveless tunic that covers the entire body, except the forearms and lower calf area. In rural areas,
-
-the Jebba is still worn both as a casual and ceremonial garment.
-
-It’s usually paired with a plain shirt and baggy trousers underneath. Nowadays, there is no shortage of fabrics and textiles in wide arrays of colors, patterns, and composition.
-
-However, in the past, the traditional Jebba came in two main colors and textures: white silk in summer and grey wool in winter.
-        </p>
-      
-      </BackgroundGradient>
-      
-    </div>
-  )
-}
-
-export default ClothSection
+export default ClothSection;

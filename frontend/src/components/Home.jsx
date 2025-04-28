@@ -6,6 +6,9 @@ import About from './About'
 import Footer from './Footer'
 
 import Cards from "./cards";
+import Explore from './Explore'
+import CultureTraditions from './CultureTraditions'
+import CallToAction from './CallToAction'
 
 const Home = () => {
   return (
@@ -15,7 +18,10 @@ const Home = () => {
     <Hero/>
     <Cards/>
     <ClothSection/>
-    <About/>
+    <Explore/><About/>
+    <CultureTraditions/>
+    
+    <CallToAction/>
   </div>
   )
 }
