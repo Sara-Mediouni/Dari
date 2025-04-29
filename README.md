@@ -32,7 +32,9 @@
 - **Frontend** : React.js
 - **Backend** : Node.js + Express.js
 - **Base de données** : MongoDB
+- **Paiement** : Stripe API (ou autre service)
 
+---
 ---
 
 ## 📸 Aperçu
@@ -44,7 +46,7 @@
 ## 🚀 Lancer localement
 
 ```bash
-git clone https://github.com/ton-pseudo/dari.git
+git clone https://github.com/Sara-Mediouni/Dari.git
 cd dari
 cd frontend && npm install
 cd admin && npm install
