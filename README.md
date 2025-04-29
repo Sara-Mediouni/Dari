@@ -60,13 +60,13 @@ nodemon server (backend)
 ---
 ```
 ## 📋 Fonctionnalités principales
--📅 Réservation en ligne de tables.
+-🛒 Vente de pâtisseries, vêtements et décorations.
 
--💳 Paiement sécurisé pour la réservation.
+-💬 Gestion du panier et commandes.
 
--👤 Gestion des utilisateurs et réservations.
+-🔎 Navigation par catégories.
 
--📋 Historique des réservations.
+-🧾 Suivi des commandes.
 
 
 ## ⚠️ Remarque
